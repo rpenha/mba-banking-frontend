@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import DATA from '../data';
 import { LoginPage } from './LoginPage';
 import { ClientDashboard } from './ClientDashboard';
