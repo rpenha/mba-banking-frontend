@@ -1,13 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import 'boxicons/css/boxicons.min.css';
+import {useAuth} from "react-oidc-context";
 
-export const Sidebar = (props) => {
-    const { user, logoutHandler, changePage, page } = props;
+export const Sidebar = ({changePage, page}) => {
+    const auth = useAuth();
+
+    const logout = async () => {
+        await auth.signoutRedirect();
+    };
+
     let menu = null;
 
-    if (user) {
-        menu = <ClientMenu changePage={changePage} page={page} logoutHandler={logoutHandler} />;
+    if (auth.isAuthenticated) {
+        menu = <ClientMenu changePage={changePage} page={page} logoutHandler={async () => logout()}/>;
     }
 
     return (
@@ -19,7 +25,7 @@ export const Sidebar = (props) => {
 }
 
 export const ClientMenu = (props) => {
-    const { changePage, logoutHandler, page } = props;
+    const {changePage, logoutHandler, page} = props;
 
     const handleLogout = () => {
         logoutHandler();
@@ -27,16 +33,16 @@ export const ClientMenu = (props) => {
 
     return (
         <ul>
-            <SideLink to="/" active={page} text="Home" icon="bx bx-home" />
-            <SideLink to="/saque" active={page} text="Saque" icon="bx bx-money" />
-            <SideLink to="/deposito" active={page} text="Depósito" icon="bx bx-dollar-circle" />
-            <SideLink to="/" onClick={handleLogout} text="Sair" icon="bx bx-log-out" />
+            <SideLink to="/" active={page} text="Home" icon="bx bx-home"/>
+            {/*<SideLink to="/saque" active={page} text="Saque" icon="bx bx-money" />*/}
+            {/*<SideLink to="/deposito" active={page} text="Depósito" icon="bx bx-dollar-circle" />*/}
+            <SideLink to="/" onClick={handleLogout} text="Sair" icon="bx bx-log-out"/>
         </ul>
     )
 }
 
 export const SideLink = (props) => {
-    const { icon, text, to, active, onClick } = props;
+    const {icon, text, to, active, onClick} = props;
 
     return (
         <li>

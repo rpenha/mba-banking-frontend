@@ -149,56 +149,6 @@ h1, h2, h3 {
     color: var(--text-color);
 }
 
-#transactions {
-    padding: 2rem;
-    border-radius: 3px;
-    background-color: white;
-    box-shadow: var(--shadow);
-    
-}
-
-#transaction-div {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
-}
-
-.transaction-item {
-  display: grid;
-  grid-template-columns: 200px auto 100px;
-  padding: .8rem;
-
-}
-
-#transactions table {
-    border-collapse: collapse;
-    table-layout: auto;
-    width: 100%;
-}
-
-#transactions th {
-    padding-bottom: 1rem;
-    font-weight: normal;
-}
-
-#transactions table th, td  {
-    border-bottom: 1px solid rgba(59, 49, 40, .2);
-}
-
-#transactions table tr {
-}
-
-#transactions table td:nth-child(1), #transactions table td:nth-child(2), 
-    #transactions th td:nth-child(2) {
-    text-align: left;
-    padding: .8rem;
-}
-
-#transactions table td:nth-child(3), #transactions table td:nth-child(4) {
-    text-align: right;
-    padding: .8rem;
-}
-
 #login-page {
   width: 100%;
   height: 100vh;

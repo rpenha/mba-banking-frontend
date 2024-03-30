@@ -1,11 +1,17 @@
 class BankingApi {
-  constructor() {
+  constructor(accessToken) {
+    this.accessToken = accessToken;
     this.baseUrl = "/api";
   }
 
   async getData(url) {
     try {
-      const response = await fetch(url);
+      const options = {
+        headers: {
+          Authorization: `Bearer ${this.accessToken}`
+        }
+      }
+      const response = await fetch(url, options);
       return await response.json();
     } catch (error) {
       console.log("error", error);
@@ -22,6 +28,11 @@ class BankingApi {
     return records;
   };
 
+  async getAccount(accountId){
+    const {record} = await this.getData(`${this.baseUrl}/accounts/${accountId}`);
+    return record;
+  }
+
   async getAccountTransactions({accountId, page, size, start, end}) {
     const qs = new URLSearchParams({
       page,
@@ -33,4 +44,6 @@ class BankingApi {
   };
 }
 
-export const Api = new BankingApi();
+export const Api = (accessToken) => new BankingApi(accessToken);
+
+//export const Api = new BankingApi();

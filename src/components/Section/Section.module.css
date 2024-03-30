@@ -1,0 +1,6 @@
+.Section {
+    padding: 2rem;
+    overflow: auto;
+    animation: fadein .3s;
+    position: relative;
+}

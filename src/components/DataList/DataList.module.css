@@ -1,0 +1,15 @@
+dl {
+    display: grid;
+    grid-template-columns: max-content auto;
+    margin: 1em 0;
+}
+
+dt {
+    grid-column-start: 1;
+    padding: .175em 1em .175em 0;
+}
+
+dd {
+    grid-column-start: 2;
+    padding: .175em 1em .175em 0;
+}

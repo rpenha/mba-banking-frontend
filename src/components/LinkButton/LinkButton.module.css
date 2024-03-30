@@ -1,0 +1,26 @@
+.LinkButton {
+    padding: 6px 16px;
+    border-radius: 3px;
+    text-decoration: none;
+    box-shadow: var(--shadow);
+
+    &:hover {
+       filter: brightness(125%);
+    }
+}
+
+.Success {
+    background-color: darkgreen;
+    color: var(--first-color);
+}
+
+.Primary {
+    background-color: var(--secondary-text-color);
+    color: var(--first-color);
+}
+
+.Danger {
+    background-color: darkred;
+    color: var(--first-color);
+}
+
