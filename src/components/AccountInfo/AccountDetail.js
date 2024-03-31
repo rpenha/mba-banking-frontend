@@ -6,7 +6,7 @@ export const AccountDetail = ({account}) => {
     return (
         <div>
             <RegularTitle>
-                {`${account.bankBranch}/${account.accountNumber}`}
+                {`${account.bankBranch} / ${account.accountNumber}`}
             </RegularTitle>
 
             <DataList>
