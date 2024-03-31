@@ -40,7 +40,6 @@ export const Deposit = ({account, onTransactionCompleted}) => {
     const api = Api(auth.user.access_token);
 
     const onSubmit = async (data) => {
-        console.log("teste");
         const payload = {
             ...data,
             amount: parseFloat(data.amount)
@@ -54,6 +53,8 @@ export const Deposit = ({account, onTransactionCompleted}) => {
         }
     }
 
+    if (!account) return null;
+
     return (
         <div className={styles.TransactionControls}>
             <h4>Deposit</h4>
@@ -65,7 +66,7 @@ export const Deposit = ({account, onTransactionCompleted}) => {
                             <label>
                                 Amount ({getCurrencySymbol("pt-BR", account.currency)})
                                 <input type="number"
-                                       defaultValue={0.00}
+                                       defaultValue={0.00.toFixed(2)}
                                        min={0.01}
                                        max={1_000_000}
                                        step={0.01}
@@ -86,7 +87,7 @@ export const Deposit = ({account, onTransactionCompleted}) => {
                             <AddAmount value={parseFloat(watch("amount"))}
                                        increment={value}
                                        currency={account.currency}
-                                       onIncrement={(value) => setValue("amount", value)}
+                                       onIncrement={(value) => setValue("amount", value.toFixed(2))}
                                        key={index}
                             />
                         ))}

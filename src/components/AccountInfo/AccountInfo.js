@@ -1,5 +1,4 @@
 import {AccountDetail} from "./AccountDetail";
-import {LinkButton, Variations} from "../LinkButton/LinkButton";
 import {Transactions} from "../Transactions/Transactions";
 import {Panel} from "../Panels/Panel";
 import {useEffect, useState} from "react";
@@ -9,48 +8,61 @@ import moment from "moment";
 import {Withdraw} from "../Transactions/Withdraw";
 import {Deposit} from "../Transactions/Deposit";
 
-export const AccountInfo = ({account}) => {
+export const AccountInfo = ({accountId}) => {
     const initialState = {
+        account: null,
         transactions: []
     }
     const [state, setState] = useState(initialState);
     const auth = useAuth();
     const api = Api(auth.user.access_token);
 
-    useEffect(() => {
-        if (!account) return;
-        const fetchData = async () => await loadTransactions();
-        fetchData();
-    }, [account]);
+    const updateAccountInfo = async () => {
+        const account = await getAccountInfo(accountId);
+        const transactions = await getTransactions(accountId);
+        setState(s => {
+            return {
+                ...s,
+                account: {...account},
+                transactions: [...transactions]
+            }
+        });
+    }
 
-    const loadTransactions = async () => {
+    useEffect(() => {
+        if (!accountId) return;
+        const fetchData = async () => {
+            await updateAccountInfo(accountId);
+        };
+        fetchData();
+    }, []);
+
+    const getAccountInfo = async (accountId) => await api.getAccount(accountId)
+
+    const getTransactions = async (accountId) => {
         const {records} = await api.getAccountTransactions({
-            accountId: account.id,
+            accountId: accountId,
             page: 0,
             size: 1000,
             start: moment().subtract(3, "month").format("YYYY-MM-DD"),
             end: moment().format("YYYY-MM-DD")
         });
-
-        setState(s => {
-            return {
-                ...s,
-                transactions: [...records]
-            }
-        });
+        return records;
     }
 
-    if (!account) return null;
-
     return (
-        <Panel>
-            <AccountDetail account={account}/>
-            <hr/>
-            <Deposit account={account} onTransactionCompleted={loadTransactions}/>
-            <hr/>
-            <Withdraw account={account} onTransactionCompleted={loadTransactions}/>
-            <hr/>
-            <Transactions items={state.transactions}/>
-        </Panel>
+        <>
+            {
+                state.account && <Panel>
+                    <AccountDetail account={state.account}/>
+                    <hr/>
+                    <Deposit account={state.account} onTransactionCompleted={updateAccountInfo}/>
+                    <hr/>
+                    <Withdraw account={state.account} onTransactionCompleted={updateAccountInfo}/>
+                    <hr/>
+                    <Transactions items={state.transactions}/>
+                </Panel>
+            }
+        </>
     )
 }

@@ -5,7 +5,8 @@ export const AddAmount = ({value, increment, currency, onIncrement}) => {
         <a href="#" onClick={(e) => {
             e.preventDefault();
             if (onIncrement) {
-                onIncrement(value + increment);
+                const newValue = isNaN(value) ? increment : increment + value;
+                onIncrement(newValue);
             }
         }}>
             +<Money amount={increment} currency={currency}/>

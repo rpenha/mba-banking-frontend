@@ -60,7 +60,6 @@ class BankingApi {
     };
 
     async withdraw(payload){
-        console.log(payload);
         const {accountId, amount, withdrawType} = payload;
         const body = {
             amount,
@@ -70,7 +69,6 @@ class BankingApi {
     }
 
     async deposit(payload){
-        console.log(payload);
         const {accountId, amount, depositType} = payload;
         const body = {
             amount,
