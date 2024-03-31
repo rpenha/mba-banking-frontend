@@ -1,13 +1,12 @@
-import {AccountHolder, AccountsList} from './Account';
+import {AccountsList} from './Account';
 import {useEffect, useState} from "react";
 import {Api} from "../services/BankingApi";
 import {useAuth} from "react-oidc-context";
-import {Transactions} from "./Transactions/Transactions";
 import {Panel} from "./Panels/Panel";
 import {RegularTitle} from "./Headings/Headings";
 import {Section} from "./Section/Section";
 
-export const MainCustomerContent = props => {
+export const MainCustomerContent = () => {
     const initialState = {
         loaded: false,
         accounts: [],
@@ -46,17 +45,6 @@ export const MainCustomerContent = props => {
 
             <AccountsList records={state.accounts}/>
 
-            {/*/!*<Account customer={state.customer} accounts={state.accounts}/>*!/*/}
-            {/*{*/}
-            {/*    state.selectedAccount &&*/}
-            {/*    <div id="transactions">*/}
-            {/*        /!*<h2>{state.selectedAccount.bankBranch}/{state.selectedAccount.accountNumber} transactions</h2>*!/*/}
-            {/*        <h2>Transactions</h2>*/}
-            {/*        <div id="transaction-div">*/}
-            {/*            <Transactions accountId={state.selectedAccount?.id}/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*}*/}
         </Section>
     )
 }

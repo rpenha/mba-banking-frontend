@@ -35,7 +35,7 @@ export const AccountInfo = ({accountId}) => {
             await updateAccountInfo(accountId);
         };
         fetchData();
-    }, []);
+    }, [accountId]);
 
     const getAccountInfo = async (accountId) => await api.getAccount(accountId)
 
