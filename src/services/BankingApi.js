@@ -68,6 +68,16 @@ class BankingApi {
         }
         await this.postData(`${this.baseUrl}/accounts/${accountId}/withdrawals`, body)
     }
+
+    async deposit(payload){
+        console.log(payload);
+        const {accountId, amount, depositType} = payload;
+        const body = {
+            amount,
+            depositType
+        }
+        await this.postData(`${this.baseUrl}/accounts/${accountId}/deposits`, body)
+    }
 }
 
 export const Api = (accessToken) => new BankingApi(accessToken);

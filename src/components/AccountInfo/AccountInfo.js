@@ -7,6 +7,7 @@ import {useAuth} from "react-oidc-context";
 import {Api} from "../../services/BankingApi";
 import moment from "moment";
 import {Withdraw} from "../Transactions/Withdraw";
+import {Deposit} from "../Transactions/Deposit";
 
 export const AccountInfo = ({account}) => {
     const initialState = {
@@ -44,6 +45,8 @@ export const AccountInfo = ({account}) => {
     return (
         <Panel>
             <AccountDetail account={account}/>
+            <hr/>
+            <Deposit account={account} onTransactionCompleted={loadTransactions}/>
             <hr/>
             <Withdraw account={account} onTransactionCompleted={loadTransactions}/>
             <hr/>

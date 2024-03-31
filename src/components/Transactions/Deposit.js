@@ -5,14 +5,15 @@ import styles from "./TransacationsControls.module.css";
 import {AddAmount} from "./AddAmount";
 import {getCurrencySymbol} from "../../common";
 
-export const Withdraw = ({account, onTransactionCompleted}) => {
+export const Deposit = ({account, onTransactionCompleted}) => {
     const types = [
         "Atm",
-        "DebitCardPurchase",
+        "MobileDeposit",
+        "DirectDeposit",
+        "CashDeposit",
+        "CheckDeposit",
         "AchTransfer",
-        "WireTransfer",
-        "CheckWithdrawal",
-        "CashWithdrawal"
+        "TransferFromAnotherAccount"
     ];
 
     const incrementValues = [
@@ -45,7 +46,7 @@ export const Withdraw = ({account, onTransactionCompleted}) => {
             amount: parseFloat(data.amount)
         };
 
-        await api.withdraw(payload);
+        await api.deposit(payload);
         reset();
 
         if (onTransactionCompleted) {
@@ -55,8 +56,8 @@ export const Withdraw = ({account, onTransactionCompleted}) => {
 
     return (
         <div className={styles.TransactionControls}>
-            <h4>Withdraw</h4>
-            <fieldset disabled={account.availableAmount === 0}>
+            <h4>Deposit</h4>
+            <fieldset>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.Inline}>
                         <input type="hidden" defaultValue={account.id} {...register("accountId")}/>
@@ -66,7 +67,7 @@ export const Withdraw = ({account, onTransactionCompleted}) => {
                                 <input type="number"
                                        defaultValue={0.00}
                                        min={0.01}
-                                       max={account.availableAmount}
+                                       max={1_000_000}
                                        step={0.01}
                                        {...register("amount", {required: true})}/>
                             </label>
@@ -74,7 +75,7 @@ export const Withdraw = ({account, onTransactionCompleted}) => {
                         <div>
                             <label>
                                 Type
-                                <select {...register("withdrawType", {required: true})}>
+                                <select {...register("depositType", {required: true})}>
                                     {types.map(t => <option key={t} value={t}>{t}</option>)}
                                 </select>
                             </label>
@@ -91,7 +92,7 @@ export const Withdraw = ({account, onTransactionCompleted}) => {
                         ))}
                     </div>
                     <div>
-                        <input type="submit" value="Withdraw" className={[styles.Button, styles.Danger].join(" ")}/>
+                        <input type="submit" value="Deposit" className={[styles.Button, styles.Success].join(" ")}/>
                     </div>
                 </form>
             </fieldset>
