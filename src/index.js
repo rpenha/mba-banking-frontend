@@ -8,9 +8,9 @@ import {WebStorageStateStore} from "oidc-client-ts";
 import {AuthProvider} from "react-oidc-context";
 
 const oidcConfig = {
-    authority: "http://localhost:8080/realms/banking",
-    client_id: "banking-webapp",
-    redirect_uri: "http://localhost:3000/login-callback",
+    authority: process.env.REACT_APP_AUTHORITY,
+    client_id: process.env.REACT_APP_CLIENT_ID,
+    redirect_uri: process.env.REACT_APP_REDIRECT_URI,
     userStore: new WebStorageStateStore({store: window.localStorage})
 };
 
