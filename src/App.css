@@ -21,7 +21,7 @@ body {
 }
 
 hr {
-  margin: 2rem 0;
+  margin: 1rem 0;
   border: 0;
   border-top: 1px solid #CCC;
 }
@@ -34,14 +34,6 @@ main {
 
 h1, h2, h3 {
   margin: .3rem 0;
-}
-
-#form {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 3px;
-  box-shadow: var(--shadow);
-  max-width: 800px;
 }
 
 /* Animation */
@@ -176,23 +168,23 @@ label {
   text-align: center;
 }
 
-#login label, label {
-  text-transform: uppercase;
-  margin-bottom: .3rem;
-  margin-top: .6rem;
-  color: #000;
-}
+/*#login label, label {*/
+/*  text-transform: uppercase;*/
+/*  margin-bottom: .3rem;*/
+/*  margin-top: .6rem;*/
+/*  color: #000;*/
+/*}*/
 
-#login input, input, select, textarea {
-  font-family: var(--font-family);
-  outline: none;
-  width: 100%;
-  font-size: 1.4rem;
-  padding: .3rem .5rem;
-  border-radius: 3px;
-  border: 1px solid var(--text-color);
-  margin-bottom: 0.8rem;
-}
+/*#login input, input, select, textarea {*/
+/*  font-family: var(--font-family);*/
+/*  outline: none;*/
+/*  width: 100%;*/
+/*  font-size: 1.4rem;*/
+/*  padding: .3rem .5rem;*/
+/*  border-radius: 3px;*/
+/*  border: 1px solid var(--text-color);*/
+/*  margin-bottom: 0.8rem;*/
+/*}*/
 
 .btn, .btn2 {
   background-color: var(--secondary-text-color);

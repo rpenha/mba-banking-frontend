@@ -1,21 +1,53 @@
-import {RegularTitle} from "../Headings/Headings";
-import {Money} from "../Money";
-import {DataList, DataListItem} from "../DataList/DataList";
+import {AccountDetail} from "./AccountDetail";
+import {LinkButton, Variations} from "../LinkButton/LinkButton";
+import {Transactions} from "../Transactions/Transactions";
+import {Panel} from "../Panels/Panel";
+import {useEffect, useState} from "react";
+import {useAuth} from "react-oidc-context";
+import {Api} from "../../services/BankingApi";
+import moment from "moment";
+import {Withdraw} from "../Transactions/Withdraw";
 
 export const AccountInfo = ({account}) => {
-    return (
-        <div>
-            <RegularTitle>
-                {`${account.bankBranch}/${account.accountNumber}`}
-            </RegularTitle>
+    const initialState = {
+        transactions: []
+    }
+    const [state, setState] = useState(initialState);
+    const auth = useAuth();
+    const api = Api(auth.user.access_token);
 
-            <DataList>
-                <DataListItem title="Balance:" data={<Money amount={account.balance} currency={account.currency}/>}/>
-                <DataListItem title="Limit:" data={<Money amount={account.totalLimit} currency={account.currency}/>}/>
-                <DataListItem title="Used limit:" data={<Money amount={account.usedLimit} currency={account.currency}/>}/>
-                <DataListItem title="Current limit:" data={<Money amount={account.currentLimit} currency={account.currency}/>}/>
-                <DataListItem title="Available amount:" data={<Money amount={account.availableAmount} currency={account.currency}/>}/>
-            </DataList>
-        </div>
+    useEffect(() => {
+        if (!account) return;
+        const fetchData = async () => await loadTransactions();
+        fetchData();
+    }, [account]);
+
+    const loadTransactions = async () => {
+        const {records} = await api.getAccountTransactions({
+            accountId: account.id,
+            page: 0,
+            size: 1000,
+            start: moment().subtract(3, "month").format("YYYY-MM-DD"),
+            end: moment().format("YYYY-MM-DD")
+        });
+
+        setState(s => {
+            return {
+                ...s,
+                transactions: [...records]
+            }
+        });
+    }
+
+    if (!account) return null;
+
+    return (
+        <Panel>
+            <AccountDetail account={account}/>
+            <hr/>
+            <Withdraw account={account} onTransactionCompleted={loadTransactions}/>
+            <hr/>
+            <Transactions items={state.transactions}/>
+        </Panel>
     )
 }

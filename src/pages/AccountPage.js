@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Section} from "../components/Section/Section";
 import {Panel} from "../components/Panels/Panel";
-import {AccountInfo} from "../components/AccountInfo/AccountInfo";
+import {AccountDetail} from "../components/AccountInfo/AccountDetail";
 import {useParams} from "react-router-dom";
 import {Api} from "../services/BankingApi";
 import {Transactions} from "../components/Transactions/Transactions";
@@ -38,7 +38,7 @@ export const AccountPage = () => {
                 state.account &&
                 <>
                     <Panel>
-                        <AccountInfo account={state.account}/>
+                        <AccountDetail account={state.account}/>
                     </Panel>
 
                     <Panel>

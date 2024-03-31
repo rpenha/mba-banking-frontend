@@ -1,11 +1,6 @@
-import {NavLink} from "react-router-dom";
 import {AccountInfo} from "./AccountInfo/AccountInfo";
-import {Panel} from "./Panels/Panel";
-import {LinkButton, Variations} from "./LinkButton/LinkButton";
-import {Transactions} from "./Transactions/Transactions";
 
-export const Account = ({customer, accounts}) => {
-
+export const Account = ({customer}) => {
     return (
         <div className="account">
             <div className="details">
@@ -20,43 +15,15 @@ export const Account = ({customer, accounts}) => {
 }
 
 export const AccountsList = ({records}) => {
-    return (
-        <>
-            {
-                records.map((account) => (
-                        <Panel key={account.id}>
-                            <AccountInfo account={account}/>
-                            <hr/>
-                            <div>
-                                {/*<LinkButton to={`/accounts/${account.id}`} variation={Variations.Primary}>*/}
-                                {/*    Transactions*/}
-                                {/*</LinkButton>*/}
-                                {/*&nbsp;*/}
-                                <LinkButton to={`/accounts/${account.id}`} variation={Variations.Danger}>
-                                    Withdraw
-                                </LinkButton>
-                                &nbsp;
-                                <LinkButton to={`/accounts/${account.id}`} variation={Variations.Success}>
-                                    Deposit
-                                </LinkButton>
-                            </div>
-                            <hr/>
-                            <Transactions accountId={account.id}/>
-                            <hr/>
-                        </Panel>
-                    )
-                )
-            }
-        </>
-    )
+    return <>{records.map((account) => <AccountInfo key={account.id} account={account}/>)}</>
 }
+
 
 export const AccountHolder = ({fullname}) => {
     return (
         <h1>{fullname}</h1>
     )
 }
-
 
 export const AccountType = (props) => {
     return (

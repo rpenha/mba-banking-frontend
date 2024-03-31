@@ -1,0 +1,78 @@
+.TransactionControls {
+    max-width: 400px;
+
+    h4 {
+        margin-bottom: 12px;
+    }
+
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Inline {
+        display: grid;
+        grid-template-columns: 200px auto;
+        column-gap: 12px;
+    }
+
+    input, select {
+        outline: none;
+        width: 100%;
+        padding: 4px 6px;
+        border-radius: 3px;
+        border: 1px solid var(--text-color);
+        display: block;
+        font-size: 1.2rem;
+        margin-top: 6px;
+    }
+
+    .Button {
+        padding: 6px 16px;
+        border-radius: 3px;
+        font-weight: bold;
+        letter-spacing: .05em;
+        font-size: 1em;
+        box-shadow: var(--shadow);
+        border: none;
+        outline: none;
+        width: auto;
+
+        &:hover {
+            filter: brightness(125%);
+            cursor: pointer;
+        }
+    }
+
+    .Success {
+        background-color: darkgreen;
+        color: var(--first-color);
+    }
+
+    .Primary {
+        background-color: var(--secondary-text-color);
+        color: var(--first-color);
+    }
+
+    .Danger {
+        background-color: darkred;
+        color: var(--first-color);
+    }
+
+    .AddAmountControls {
+        font-size: .8em;
+        padding: 12px 0;
+        a {
+            margin: 3px;
+            color: blue;
+            text-decoration: none;
+        }
+    }
+
+    label {
+        text-transform: none;
+        font-size: .9em;
+    }
+}
+
